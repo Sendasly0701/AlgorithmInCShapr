@@ -1,0 +1,288 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Algorithm1
+{   
+    class Program
+    {      
+        static void Main(string[] args)
+        {
+            #region  在排序数组中删除重复元素.1.0
+            //1.0
+            //int[] nums_1 = new int[] { 0, 1, 1, 1, 2, 3, 4, 4, 5, 5, 2, 2, 3, 3, 5, 5, 6 };          
+
+            //int return_i = RemoveDuplicate(nums_1);
+            //Console.WriteLine(return_i);
+            //--------------------
+            #endregion
+
+            #region 股票问题（未完成）2.0
+            //2.0
+            //int[] nums_2 = new int[] { 3, 4, 5, 6, 7, 1, 2, 9, 13, 4, 17, 2, 3, 4, 6, 2, 1, 2 ,19};
+
+            //int return_numberMax = CountMaxNum(nums_2);
+            //Console.WriteLine(return_numberMax);
+            //---------- ----------
+            #endregion
+
+            #region 声明两个变量，并将两个变量的值进行交换。 在不声明第三个变量的情况下再完成一遍。3.0
+
+            // 1
+            //int i = 30;
+            //int n = 50;
+
+            //int tmp = i;
+            //i = n;
+            //n = tmp;
+            //Console.WriteLine("i = {0}, n = {1}", i,n);
+            //Console.ReadKey();
+            // 1 end
+
+            // 2
+            //int i = 30;
+            //int n = 50;
+
+            //i = i + n;
+            //n = i - n;
+            //i = i - n;
+            //Console.WriteLine("i = {0}, n = {1}", i, n);
+
+            #endregion
+
+            #region 将3.0的题用封装的方法来做 4.0
+            //int i = 70;
+            //int n = 40;
+
+            //ChangeNum(ref i, ref n);
+            //Console.WriteLine("i = {0}, n = {1}", i, n);
+            #endregion
+
+            #region 用户输入一个字符串，计算字符串的字符个数并输出。 5.0
+            //while (true)  //加上while循环可以不间断输入.
+            //{
+            //    Console.WriteLine("Please Input String :");
+            //    string str = Console.ReadLine();
+            //    Console.WriteLine("String's Length is : {0}", str.Length);
+            //}                   
+            #endregion
+
+            #region 用封装的方法实现比较两个数的最大值， 接着实现比较n个数的最大值. 6.0
+            // int.parse() 强制转换int
+            //int i = 50;
+            //int n = 70;
+            //int x = 100;
+            //int c = 20;
+            //int l = 700;
+            //Console.WriteLine("Max number is : {0}", CompraeMaxNums(i, n));
+            //Console.WriteLine("-------------");
+            //Console.WriteLine("Max number is : {0}", CompraeMaxNumInNNumber(i, n, x, c, l));
+            #endregion
+
+            #region 用封装的方法计算 1-100 所有整数的和 7.0
+            //Console.WriteLine("1-100整数的和 ： {0}", CountNumSum());
+            #endregion
+
+            #region 用封装的方法计算 1-100 所有奇数的和 8.0
+            //Console.WriteLine("1-100所有奇数的和 ： {0}", CountOddNumber());
+            #endregion
+
+            #region 用封装的方法实现输入的一个整数是否为质数 9.0
+            //while (true)
+            //{
+            //    Console.WriteLine("Please Input a Number : ");
+            //    int number = int.Parse(Console.ReadLine());
+            //    Console.WriteLine("This Number is Prime ? {0}", ChangeNumberIsPrime(number));
+            //}
+            #endregion
+
+            #region 用封装的方法计算1-100所有质数（素数）的和
+            //Console.WriteLine("1-100所有质数（素数）的和： {0}",PrimeSum());
+            #endregion
+
+            #region 计算 整数数组 {1，19，92，132，2，31，42，4123，312，7，0，1}； 的最大值 11.0
+            //int[] array11 = new int[] { 1,19,92,132,2,31,42,4123,312,7,0,1 };
+            //Console.WriteLine("This Array's Max Number is : {0}", ArrayIntMax(array11));
+            #endregion
+
+            #region 计算一个字符串数组中的最长字符是 12.0
+            string[] array12 = new string[] { "asdwdaawd", "asdasdwaddsc", "cwacxdsadwax", "xcdsadsadijhio", "  dsadwadxa   dasd adsa" };
+            Console.WriteLine("MaxLengthStringIs : {0}", CountMaxLengthInStringArray(array12));
+            #endregion
+        }
+
+        #region 1.0 function
+        //1.0 删除排序数组中的重复项.
+        //双指针法. i 为慢指针， j 为快指针.
+        // 时间复杂度 O(n)
+        // 空间复杂度 O(1)
+
+        private static int RemoveDuplicate(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+
+            int i = 0;
+            for(int j = 1; j < nums.Length; j++)
+            {
+                if(nums[j] != nums[i])
+                {
+                    i++;
+                    nums[i] = nums[j];
+                }
+            }
+            return i + 1;
+        }
+        #endregion
+
+        #region 2.0 function
+        //2.0 判断买股票能获得的最大利润 | (求连续数组最大)
+        //穷举法 
+        // 时间复杂度 O(n^2) 双层嵌套循环
+        // 空间复杂度 O(n)
+
+        private static int CountMaxNum(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+
+            int numberMax = 0;
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                for (int j = i + 1; j < nums.Length; j++)
+                {
+                    int number = nums[j] - nums[i];
+                    if (number > numberMax)
+                    {
+                        numberMax = number;
+                    }
+                }
+            }
+            return numberMax + 1;
+        }
+        #endregion
+
+        #region 4.0 function
+        private static void ChangeNum(ref int i,ref int n)
+        {
+            i = i + n;
+            n = i - n;
+            i = i - n;
+
+        }
+
+        #endregion
+
+        #region 6.0 function
+
+        private static int CompraeMaxNums(int i, int n)
+        {
+            return (i > n) ? i : n;
+        }
+
+        private static int CompraeMaxNumInNNumber(params int[] nums)  //params int[] 可以传任意长度的参数，传过来的长度就是参数的长度.
+        {
+            int maxNum = 0;
+            for(int j = 0; j < nums.Length; j++)
+            {
+                if(nums[j] > maxNum)
+                {
+                    maxNum = nums[j];
+                }
+            }
+            return maxNum;
+        }
+
+        #endregion
+
+        #region 7.0 function
+        private static int CountNumSum()
+        {
+            int sum = 0;
+            for(int i = 1; i <= 100; i++)
+            {
+                sum += i;
+            }
+            return sum;
+        }
+        #endregion
+
+        #region 8.0 function
+        private static int CountOddNumber()
+        {
+            int sum = 0;
+            for(int i = 1; i <= 100; i++)
+            {
+                if(i % 2 != 0)
+                {
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+
+        #endregion
+
+        #region 9.0 function
+        private static bool ChangeNumberIsPrime(int number)
+        {
+            for(int i = 2; i <= number - 1; i++)
+            {
+                if(number % i == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        #endregion
+
+        #region 10.0 function
+        private static int PrimeSum()
+        {
+            int sum = 0;
+            for(int i = 2; i <= 100; i++)
+            {
+                if(ChangeNumberIsPrime(i))  //调用判断是否是质数的方法.
+                {
+                    sum += i;
+                }
+            }
+            return sum;
+        }
+
+        #endregion
+
+        #region 11.0 function
+        private static int ArrayIntMax(int[] array) 
+        {
+            int numMax = 0;
+            for(int i = 0; i < array.Length; i++)
+            {
+                if(numMax < array[i])
+                {
+                    numMax = array[i];
+                }
+            }
+            return numMax;
+        }
+
+        #endregion
+
+        #region
+        private static string CountMaxLengthInStringArray(string[] array)
+        {
+            string maxLength = array[0];
+            for (int i = 0; i < array.Length; i++)
+            {
+                if(maxLength.Length < array[i].Length)
+                {
+                    maxLength = array[i];
+                }
+            }
+            return maxLength;
+        }
+
+        #endregion
+    }
+}
