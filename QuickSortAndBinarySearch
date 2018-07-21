@@ -1,0 +1,88 @@
+using System;
+
+namespace SearchAlgorithm
+{
+    class Program
+    {
+        private static void Main(string[] args)
+        {
+            int[] arr = new int[] { 7, 3, 4, 5, 1, 9, 2, 6, 0, 72, -1 };
+
+            Sort(arr);
+            Console.WriteLine("排序后： ");
+            for(int i = 0; i < arr.Length; i++)
+            {
+                Console.WriteLine(arr[i]);
+            }
+
+            Console.WriteLine("----------------");
+
+            Console.WriteLine("二分搜索结果: " + Search(arr, 0, arr.Length - 1, 7));
+        }
+
+        /// <summary>
+        /// 快速排序算法
+        /// </summary>
+        /// <param name="arr"></param>
+        private static void Sort(int[] arr)
+        {
+            Sort(arr, 0, arr.Length - 1);
+        }
+
+        private static void Sort(int[] arr, int left, int right)
+        {
+            if(left < right)
+            {
+                int middle = arr[(left + right) / 2];
+                int i = left - 1;
+                int j = right + 1;
+
+                while (true)
+                {
+                    while (arr[++i] < middle) ;
+                    while (arr[--j] > middle) ;
+
+                    if (i >= j) break;
+
+                    Sawp(arr, i, j);
+                }
+
+                Sort(arr, left, i - 1);
+                Sort(arr, j + 1, right);
+            }
+        }
+
+        private static void Sawp(int[] arr, int i, int j)
+        {
+            int temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+        }
+
+        //------------------------
+        /// <summary>
+        /// 二分搜索算法
+        /// </summary>
+        /// <returns></returns>
+        private static int Search(int[] arr, int start, int end, int keyValue)
+        {
+            int middle;
+            while(start <= end)
+            {
+                middle = (start + end) / 2;
+                if(arr[middle] < keyValue)
+                {
+                    start = middle + 1;
+                }else if(arr[middle] > keyValue)
+                {
+                    end = middle - 1;
+                }
+                else
+                {
+                    return middle;
+                }
+            }
+            return -1;
+        }
+    }
+}
